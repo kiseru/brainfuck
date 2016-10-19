@@ -1,14 +1,15 @@
+package com.brainfuck;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.ArrayList;
+
 /**
  * @author Alexandr Kiselev, Valery Petrov
  * 11-602
  * Brainfuck
  *
  */
-package com.brainfuck;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 
 public class Brainfuck {
 // атрибуты
