@@ -20,7 +20,7 @@ public class Brainfuck {
 
 // методы
     // конструктор по умолчанию (запрещён)
-    private Brainfuck() throws Exception {}
+    private Brainfuck() {}
 
     // конструктор
     public Brainfuck(String fileName) throws Exception {
