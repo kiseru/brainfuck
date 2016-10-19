@@ -16,7 +16,7 @@ public class Brainfuck {
     private char[] tape; // входная лента
     private int i; // адрес текущей ячейки
     private int n = 30000; // размерность ленты
-    private BufferedReader reader; // не понимаю
+    private BufferedReader reader; // поток чтения из файла
 
 // методы
     // конструктор по умолчанию (запрещён)
@@ -78,30 +78,22 @@ public class Brainfuck {
 
     // распознавание элемент с поседующими действиями
     private void make(char element) throws Exception {
-        switch (element) {
-            case '+':
-                add();
-                break;
-            case '-':
-                sub();
-                break;
-            case '>':
-                next();
-                break;
-            case '<':
-                prev();
-                break;
-            case '.':
-                print();
-                break;
-            case ',':
-                set((char)reader.read());
-                break;
-            case '[':
-                cycle();
-                break;
-            default:
-                break;
+        if (element == '+') {
+            add();
+        } else if (element == '-') {
+            sub();
+        } else if (element == '>') {
+            next();
+        } else if (element == '<') {
+            prev();
+        } else if (element == '.') {
+            print();
+        } else if (element == ',') {
+            set(read());
+        } else if (element == '[') {
+            cycle();
+        } else if (element != '\n' && element != ' ' && element != '\r') {
+            throw new Exception("");
         }
     }
 
