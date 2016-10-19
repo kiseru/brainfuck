@@ -1,5 +1,8 @@
 /**
- * Created by Users on 18.10.2016.
+ * @author Alexandr Kiselev, Valery Petrov
+ * 11-602
+ * Brainfuck
+ *
  */
 package com.brainfuck;
 
@@ -10,55 +13,57 @@ import java.util.ArrayList;
 public class Brainfuck {
 // атрибуты
     private char[] tape; // входная лента
-    /* начинется с нуля(википедия). i = 0*/
-    private int i = 0; // адрес текущей ячейки
+    private int i; // адрес текущей ячейки
     private int n = 30000; // размерность ленты
     private BufferedReader reader; // не понимаю
 
 // методы
-    // конструктор по умолчанию
-    private Brainfuck() throws Exception {
-        // входная лента состоит из нулей.
-        // мне кажется, в учебных целях стоит показать это
-        this("");
-    }
+    // конструктор по умолчанию (запрещён)
+    private Brainfuck() throws Exception {}
+
     // конструктор
-    /* начинется с нуля(википедия). i = 0*/
     public Brainfuck(String fileName) throws Exception {
         tape = new char[n];
-        //for (int i = 0; i < n; i++) tape[i] = '0';
-        //i = n / 2;
+        i = n / 2;
         reader = new BufferedReader(new FileReader(fileName));
     }
+
     // движение вправо по входной ленте
     private void next() throws Exception {
         if (i < n) i++;
         else throw new Exception("Error. Out of bounds of the array");
     }
+
     // движение влево по входной ленте
     private void prev() throws Exception {
         if (i > 0) i--;
         else throw new Exception("Error. Out of bounds of the array");
     }
+
     // увеличить значение текущей ячейки
     private void add() {
         tape[i]++;
     }
+
     // уменьшить значение текущей ячейки
     private void sub() {
         tape[i]--;
     }
+
     // вывести на выходную ленту значение текущей ячейки
     private void print() {
         System.out.print(tape[i]);
     }
+
     // ввод значения ячейки извне
     private void set(char element) {
         tape[i] = element;
     }
+
     // цикл
     private void cycle() throws Exception {
-        ArrayList<Character> list = new ArrayList<>(); // не понимаю
+        // динамический массив, в котором лежит тело цикла
+        ArrayList<Character> list = new ArrayList<>();
         char input;
         while ((input = read()) != ']') {
             list.add(input);
