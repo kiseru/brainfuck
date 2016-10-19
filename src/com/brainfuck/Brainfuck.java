@@ -15,7 +15,7 @@ public class Brainfuck {
 // атрибуты
     private char[] tape; // входная лента
     private int i; // адрес текущей ячейки
-    final private int n = 30000; // размерность ленты
+    private final int n = 30000; // размерность ленты
     private BufferedReader reader; // поток чтения из файла
 
 // методы

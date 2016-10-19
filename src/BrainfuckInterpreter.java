@@ -1,4 +1,4 @@
-import com.brainfuck.Brainfuck;s
+import com.brainfuck.Brainfuck;
 
 public class BrainfuckInterpreter {
     public static void main(String[] args) throws Exception {
