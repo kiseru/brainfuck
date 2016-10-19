@@ -1,9 +1,6 @@
-/**
- * Created by Users on 18.10.2016.
- */
-import com.brainfuck.Brainfuck;
+import com.brainfuck.Brainfuck;s
 
-public class Test {
+public class BrainfuckInterpreter {
     public static void main(String[] args) throws Exception {
         Brainfuck brainfuck = new Brainfuck("C:\\Users\\Users\\IdeaProjects\\Brainfuck\\src\\input.txt");
         brainfuck.run();
