@@ -61,7 +61,7 @@ public class Brainfuck {
         tape[i] = element;
     }
 
-    // цикл
+    // реализация цикла
     private void cycle() throws Exception {
         // динамический массив, в котором лежит тело цикла
         ArrayList<Character> list = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Brainfuck {
         }
     }
 
-    // распознавание элемент с поседующими действиями
+    // распознавание элемента с поседующими действиями
     private void make(char element) throws Exception {
         if (element == '+') {
             add();
