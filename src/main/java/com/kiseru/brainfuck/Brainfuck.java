@@ -1,4 +1,4 @@
-package com.brainfuck;
+package com.kiseru.brainfuck;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
