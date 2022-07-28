@@ -2,6 +2,7 @@ package com.kiseru.brainfuck
 
 import com.kiseru.brainfuck.exception.IllegalSymbolToProcess
 import java.io.BufferedReader
+import java.io.Reader
 import java.nio.file.Files
 import java.nio.file.Paths
 
@@ -29,16 +30,9 @@ fun main(args: Array<String>) {
 
 private fun runInterpreter(reader: BufferedReader) {
     while (reader.ready()) {
-        make(reader, read(reader))
+        make(reader, reader.read().toChar())
     }
 }
-
-/**
- * Читает символ из потока.
- *
- * @return символ
- */
-private fun read(reader: BufferedReader) = reader.read().toChar()
 
 /**
  * Запускает необходимую команду исходя из полученного символа.
@@ -46,63 +40,26 @@ private fun read(reader: BufferedReader) = reader.read().toChar()
  * @throws com.kiseru.brainfuck.exception.IllegalSymbolToProcess
  *         если получает на вход символ, который невозможно обработать
  */
-private fun make(reader: BufferedReader, value: Char) {
+private fun make(reader: Reader, value: Char) {
     when (value) {
-        '+' -> add()
-        '-' -> sub()
-        '>' -> next()
-        '<' -> prev()
+        '+' -> tape[pointer]++
+        '-' -> tape[pointer]--
+        '>' -> pointer++
+        '<' -> pointer--
         '.' -> print(tape[pointer])
-        ',' -> set(read(reader))
+        ',' -> tape[pointer] = reader.read().toChar()
         '[' -> cycle(reader)
         else -> throw IllegalSymbolToProcess("Получен неверный символ для обработки")
     }
 }
 
 /**
- * Увеличивает значение текущей ячейки единицу.
- */
-private fun add() {
-    tape[pointer]++
-}
-
-/**
- * Уменьшает значение текущей ячейки на единицу.
- */
-private fun sub() {
-    tape[pointer]--
-}
-
-/**
- * Перемещает указатель на ячейку вправо.
- */
-private fun next() {
-    pointer++
-}
-
-/**
- * Перемещает указатель на ячейку влево.
- */
-private fun prev() {
-    pointer--
-}
-
-/**
- * Задает ячейке новое значение.
- *
- * @param newValue новое значение
- */
-private fun set(newValue: Char) {
-    tape[pointer] = newValue
-}
-
-/**
  * Запускает цикл.
  */
-private fun cycle(reader: BufferedReader) {
+private fun cycle(reader: Reader) {
     val list = ArrayList<Char>()
     var input: Char
-    while (read(reader).also { input = it } != ']') {
+    while (reader.read().toChar().also { input = it } != ']') {
         list.add(input)
     }
     while (tape[pointer].code != 0) {
