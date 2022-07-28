@@ -1,14 +1,25 @@
 package com.kiseru.brainfuck;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Brainfuck {
 
-    // атрибуты
-    private char[] tape; // входная лента
-    private int i; // адрес текущей ячейки
-    private BufferedReader reader; // поток чтения из файла
+    /**
+     * Входная лента.
+     */
+    private char[] tape;
+
+    /**
+     * Указатель на текущую ячейку.
+     */
+    private int i;
+
+    /**
+     * Поток чтения из файла.
+     */
+    private BufferedReader reader;
 
     public Brainfuck(char[] tape, BufferedReader reader) {
         this.tape = tape;
@@ -16,41 +27,66 @@ public class Brainfuck {
         i = tape.length / 2;
     }
 
-    // движение вправо по входной ленте
+    /**
+     * Передвигает указатель ячейки вправо по входной ленте.
+     *
+     * @throws java.lang.Exception если вышли за границы ленты
+     */
     private void next() throws Exception {
-        if (i < tape.length) i++;
-        else throw new Exception("Error. Out of bounds of the array");
+        if (i < tape.length) {
+            i++;
+        } else {
+            throw new Exception("Error. Out of bounds of the array");
+        }
     }
 
-    // движение влево по входной ленте
+    /**
+     * Передвигает указатель ячейки влево по входной ленте.
+     *
+     * @throws java.lang.Exception если вышли за границы ленты
+     */
     private void prev() throws Exception {
-        if (i > 0) i--;
-        else throw new Exception("Error. Out of bounds of the array");
+        if (i > 0) {
+            i--;
+        } else {
+            throw new Exception("Error. Out of bounds of the array");
+        }
     }
 
-    // увеличить значение текущей ячейки
+    /**
+     * Увеличивает значение текущей ячейки.
+     */
     private void add() {
         tape[i]++;
     }
 
-    // уменьшить значение текущей ячейки
+    /**
+     * Уменьшает значение текущей ячейки.
+     */
     private void sub() {
         tape[i]--;
     }
 
-    // вывести на выходную ленту значение текущей ячейки
+    /**
+     * Выводит на экран значение текущей ячейки
+     */
     private void print() {
         System.out.print(tape[i]);
     }
 
-    // ввод значения ячейки извне
-    private void set(char element) {
-        tape[i] = element;
+    /**
+     * Задает текущей ячейке новое значение.
+     *
+     * @param newValue новое значение
+     */
+    private void set(char newValue) {
+        tape[i] = newValue;
     }
 
-    // реализация цикла
+    /**
+     * Реализация цикла.
+     */
     private void cycle() throws Exception {
-        // динамический массив, в котором лежит тело цикла
         ArrayList<Character> list = new ArrayList<>();
         char input;
         while ((input = read()) != ']') {
@@ -63,7 +99,11 @@ public class Brainfuck {
         }
     }
 
-    // распознавание элемента с поседующими действиями
+    /**
+     * Распознавание элемента с последующими действиями.
+     *
+     * @throws java.lang.Exception если считает неверные символы кода
+     */
     private void make(char element) throws Exception {
         if (element == '+') {
             add();
@@ -84,15 +124,24 @@ public class Brainfuck {
         }
     }
 
-    // запуск интерпретатора
+    /**
+     * Запускает интерпретатор.
+     *
+     * @throws java.io.IOException если произойдет ошибка связанная с I/O
+     * @throws java.lang.Exception если считает неверные символы кода
+     */
     public void run() throws Exception {
         while (reader.ready()) {
             make(read());
         }
     }
 
-    // считывание значения ячейки
-    private char read() throws Exception {
+    /**
+     * Считывает значения ячейки
+     *
+     * @throws java.io.IOException если произойдет ошибка связанная с I/O
+     */
+    private char read() throws IOException {
         return (char) reader.read();
     }
 }
