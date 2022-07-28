@@ -1,37 +1,24 @@
 package com.kiseru.brainfuck;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 
-/**
- * @author Alexandr Kiselev, Valery Petrov
- * 11-602
- * Brainfuck
- *
- */
-
 public class Brainfuck {
-// атрибуты
+
+    // атрибуты
     private char[] tape; // входная лента
     private int i; // адрес текущей ячейки
-    private final int n = 30000; // размерность ленты
     private BufferedReader reader; // поток чтения из файла
 
-// методы
-    // конструктор по умолчанию (запрещён)
-    private Brainfuck() {}
-
-    // конструктор
-    public Brainfuck(String fileName) throws Exception {
-        tape = new char[n];
-        i = n / 2;
-        reader = new BufferedReader(new FileReader(fileName));
+    public Brainfuck(char[] tape, BufferedReader reader) {
+        this.tape = tape;
+        this.reader = reader;
+        i = tape.length / 2;
     }
 
     // движение вправо по входной ленте
     private void next() throws Exception {
-        if (i < n) i++;
+        if (i < tape.length) i++;
         else throw new Exception("Error. Out of bounds of the array");
     }
 
@@ -106,6 +93,6 @@ public class Brainfuck {
 
     // считывание значения ячейки
     private char read() throws Exception {
-        return (char)reader.read();
+        return (char) reader.read();
     }
 }
