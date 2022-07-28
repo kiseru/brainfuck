@@ -57,7 +57,7 @@ private fun make(reader: Reader, value: Char) {
  * Запускает цикл.
  */
 private fun cycle(reader: Reader) {
-    val list = ArrayList<Char>()
+    val list = mutableListOf<Char>()
     var input: Char
     while (reader.read().toChar().also { input = it } != ']') {
         list.add(input)
